@@ -44,4 +44,16 @@ describe('Login e registro de usuarios no Alurapic', () => {
     cy.contains('button', 'Register').click();
     cy.contains('ap-vmessage', 'Mininum length is 8').should('be.visible');
   });
+
+  // utilizando comandos
+  it.only('login do usuario valido', () => {
+    cy.createAccount('Jonatas', '1234');
+  });
+
+  it.only('login do usuario invalido', () => {
+    cy.createAccount('Jonatas', '1234');
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Invalid user name or password')
+    });
+  });
 })
